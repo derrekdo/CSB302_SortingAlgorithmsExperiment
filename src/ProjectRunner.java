@@ -52,8 +52,7 @@ public class ProjectRunner {
 
         for (ArraySortingInterface strategy : sortingStrategies.values()) {
             arrayCopies = copyArrays(arrays);
-            HashMap<int[], Integer> data = strategy.sortArrays(arrays);
-            debugPrintDataRemoveMe(data);
+            strategy.sortArrays(arrayCopies);
         }
     }
 
