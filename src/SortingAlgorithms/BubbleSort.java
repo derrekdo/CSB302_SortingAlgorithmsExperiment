@@ -6,32 +6,25 @@ package SortingAlgorithms;
  */
 public class BubbleSort implements ArraySortingInterface {
 
-    public void sortArrays(int[][] arrays) {
+    public void sortArray(int[] array) {
+        
+        //go through the entire array until one less than the last element.
+        //we stop before the last because we are always peeking one index further into the array
+        for (int j = 0; j < array.length - 1; j++) {
 
+            //sweep through the array aga
+            for (int k = 0; k < array.length - j - 1; k++) {
 
-        //setup some local variables for processing each array we are sorting
-        int[] arrayToSort;
-
-        //loop through our input arrays and sort them using the bubble sort algorithm
-        for (int i = 0; i < arrays.length; i++) {
-
-            //extracting the current array being sorted so the algorithm is a bit easier to understand
-            arrayToSort = arrays[i];
-
-            //go through the entire array until one less than the last element.
-            //we stop before the last because we are always peeking one index further into the array
-            for (int j = 0; j < arrayToSort.length - 1; j++) {
-
-                //sweep through the array aga
-                for (int k = 0; k < arrayToSort.length - j - 1; k++) {
-
-                    if (arrayToSort[k] > arrayToSort[k + 1]) {
-                        int temp = arrayToSort[k];
-                        arrayToSort[k] = arrayToSort[k + 1];
-                        arrayToSort[k + 1] = temp;
-                    }
+                if (array[k] > array[k + 1]) {
+                    int temp = array[k];
+                    array[k] = array[k + 1];
+                    array[k + 1] = temp;
                 }
             }
         }
+    }
+
+    public String algorithmName() {
+        return "Bubble Sort";
     }
 }
