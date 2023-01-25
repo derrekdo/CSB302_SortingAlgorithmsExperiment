@@ -2,57 +2,65 @@ import SortingAlgorithms.ArraySortingInterface;
 import SortingAlgorithms.BubbleSort;
 import SortingAlgorithms.InsertionSort;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 public class ProjectRunner {
-    static HashMap<String, ArraySortingInterface> sortingStrategies;
+    static ArrayList<ArraySortingInterface> sortingStrategies;
+    static StopWatch stopWatch;
+    static ArrayList<String> results;
 
     public static void main(String[] args) {
 
-
-        int[][] arrays = debugBasicArrays();
+        HashMap<ArrayBuilder.arrayTypes, int[][]> testArrays = ArrayBuilder.buildAllArrays();
+        stopWatch = new StopWatch();
+        results = new ArrayList<String>();
 
         buildStartegyList();
-        sortArrays(arrays);
+        sortArrays(testArrays);
+        printResults();
     }
 
     //add your sorting algorithms here.
     public static void buildStartegyList() {
 
-        sortingStrategies = new HashMap<String, ArraySortingInterface>();
-        sortingStrategies.put("Insertion Sort", new InsertionSort());
-        sortingStrategies.put("Bubble Sort", new BubbleSort());
+        sortingStrategies = new ArrayList<ArraySortingInterface>();
+        sortingStrategies.add(new InsertionSort());
+        sortingStrategies.add(new BubbleSort());
     }
 
-    // replace this with the fancy array builder method
-    public static int[][] debugBasicArrays() {
+    public static void sortArrays(HashMap<ArrayBuilder.arrayTypes, int[][]> testArrays) {
 
-        int[][] output = new int[14][];
+        //iterate through the kv pairs. use the key as the iterator so that we use it later to print what ordering we sorted
+        for (ArrayBuilder.arrayTypes type : testArrays.keySet()) {
 
-        Random rand = new Random();
+            //extract the int arrays for copying then sorting
+            int[][] arrayConfig = testArrays.get(type);
+            //make copy of arrays
+            int[][] arrayCopies;
 
-        int size = 4;
-        for (int i = 0; i < 14; i++) {
-            output[i] = new int[size];
-            size *= 2;
-
-            for (int j = 0; j < output[i].length; j++) {
-                int num = rand.nextInt(40000);
-                output[i][j] = num;
+            for (ArraySortingInterface strategy : sortingStrategies) {
+                arrayCopies = copyArrays(arrayConfig);
+                timeThisSort(type, strategy, arrayCopies);
             }
         }
-        return output;
     }
 
-    public static void sortArrays(int[][] arrays) {
+    // helper function to make the sortArrays function a bit easier to read
+    private static void timeThisSort(ArrayBuilder.arrayTypes type, ArraySortingInterface strategy, int[][] arrayCopies) {
 
-        //make copy of arrays
-        int[][] arrayCopies;
+        for (int i = 0; i < arrayCopies.length; i++) {
 
-        for (ArraySortingInterface strategy : sortingStrategies.values()) {
-            arrayCopies = copyArrays(arrays);
-            strategy.sortArrays(arrayCopies);
+            int arraySize = arrayCopies[i].length;
+
+            stopWatch.start();
+            strategy.sortArray(arrayCopies[i]);
+            stopWatch.end();
+
+            String result = String.format("Algorithm: %s. Array type: %s %s elements Time spent: %s",
+                    strategy.algorithmName(), type.toString(), arraySize, stopWatch.getDuration());
+            stopWatch.reset();
+            results.add(result);
         }
     }
 
@@ -69,13 +77,9 @@ public class ProjectRunner {
         return arrayCopies;
     }
 
-    //stub function for outputting data. use for debugging then remove once we come up with the actual display stuff
-    public static void debugPrintDataRemoveMe(HashMap<int[], Integer> data) {
-
-        for (int[] array : data.keySet()) {
-            int operations = data.get(array);
-
-            System.out.println("array: " + array.toString() + " has " + operations + " operations");
+    public static void printResults() {
+        for (String result : results) {
+            System.out.println(result);
         }
     }
 }
