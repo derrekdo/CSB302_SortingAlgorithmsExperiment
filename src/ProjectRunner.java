@@ -1,6 +1,7 @@
 import SortingAlgorithms.ArraySortingInterface;
 import SortingAlgorithms.BubbleSort;
 import SortingAlgorithms.InsertionSort;
+import SortingAlgorithms.SelectionSort;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class ProjectRunner {
         sortingStrategies = new ArrayList<ArraySortingInterface>();
         sortingStrategies.add(new InsertionSort());
         sortingStrategies.add(new BubbleSort());
+        sortingStrategies.add((new SelectionSort()));
     }
 
     public static void sortArrays(HashMap<ArrayBuilder.arrayTypes, int[][]> testArrays) {
