@@ -1,22 +1,27 @@
 import SortingAlgorithms.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProjectRunner {
     static ArrayList<ArraySortingInterface> sortingStrategies;
     static StopWatch stopWatch;
-    static ArrayList<String> results;
+    static ArrayList<String[]> results;
+    static ArrayList<String> printResults; // delete this later. this is for debug now
+    private static final int fields = 4;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         HashMap<ArrayBuilder.arrayTypes, int[][]> testArrays = ArrayBuilder.buildAllArrays();
         stopWatch = new StopWatch();
-        results = new ArrayList<String>();
-
+        results = new ArrayList<String[]>();
+        printResults = new ArrayList<String>();
+        
         buildStartegyList();
         sortArrays(testArrays);
         printResults();
+        OutputMaker.makeCSV(results);
     }
 
     //add your sorting algorithms here.
@@ -57,9 +62,16 @@ public class ProjectRunner {
             strategy.sortArray(arrayCopies[i]);
             stopWatch.end();
 
-            String result = String.format("Algorithm: %s. Array type: %s %s elements Time spent: %s",
+            String[] result = new String[fields];
+            result[0] = strategy.algorithmName();
+            result[1] = type.toString();
+            result[2] = Integer.toString(arraySize);
+            result[3] = stopWatch.getDuration();
+
+            String printResult = String.format("Algorithm: %s. Array type: %s %s elements Time spent: %s",
                     strategy.algorithmName(), type.toString(), arraySize, stopWatch.getDuration());
             stopWatch.reset();
+            printResults.add(printResult);
             results.add(result);
         }
     }
@@ -78,7 +90,7 @@ public class ProjectRunner {
     }
 
     public static void printResults() {
-        for (String result : results) {
+        for (String result : printResults) {
             System.out.println(result);
         }
     }
