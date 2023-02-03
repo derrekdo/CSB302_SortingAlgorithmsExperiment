@@ -4,5 +4,5 @@ public interface ArraySortingInterface {
 
     public void sortArray(int[] array);
 
-    public String algorithmName();
+    public String getAlgorithmName();
 }

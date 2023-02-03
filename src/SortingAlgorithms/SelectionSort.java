@@ -30,7 +30,7 @@ public class SelectionSort implements ArraySortingInterface {
         }
     } // O(n^2)
 
-    public String algorithmName() {
+    public String getAlgorithmName() {
         return "Selection Sort";
     }
 }

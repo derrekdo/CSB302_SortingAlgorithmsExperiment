@@ -28,7 +28,7 @@ public class InsertionSort implements ArraySortingInterface {
         }
     }
 
-    public String algorithmName() {
+    public String getAlgorithmName() {
         return "Insertion Sort";
     }
 }
