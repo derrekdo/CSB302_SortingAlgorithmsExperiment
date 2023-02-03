@@ -7,21 +7,26 @@ import java.util.HashMap;
 public class ProjectRunner {
     static ArrayList<ArraySortingInterface> sortingStrategies;
     static StopWatch stopWatch;
-    static ArrayList<String[]> results;
+    static HashMap<String, AlgorithmTestResults> testResults;
     static ArrayList<String> printResults; // delete this later. this is for debug now
-    private static final int fields = 4;
+    static int totalOrderingTypes;
+    static int totalSortingAlgorithms;
 
     public static void main(String[] args) throws IOException {
 
-        HashMap<ArrayBuilder.arrayTypes, int[][]> testArrays = ArrayBuilder.buildAllArrays();
+        HashMap<ArrayBuilder.arrayTypes, int[][]> testArrayTypes = ArrayBuilder.buildAllArrays();
         stopWatch = new StopWatch();
-        results = new ArrayList<String[]>();
+        testResults = new HashMap<String, AlgorithmTestResults>();
         printResults = new ArrayList<String>();
-        
+
         buildStartegyList();
-        sortArrays(testArrays);
+
+        totalOrderingTypes = ArrayBuilder.arrayTypes.values().length;
+        totalSortingAlgorithms = sortingStrategies.size();
+
+        sortArrays(testArrayTypes);
         printResults();
-        OutputMaker.makeCSV(results);
+        OutputMaker.makeCSV(testResults);
     }
 
     //add your sorting algorithms here.
@@ -30,29 +35,43 @@ public class ProjectRunner {
         sortingStrategies = new ArrayList<ArraySortingInterface>();
         sortingStrategies.add(new InsertionSort());
         sortingStrategies.add(new BubbleSort());
-        sortingStrategies.add((new SelectionSort()));
+        sortingStrategies.add(new SelectionSort());
         sortingStrategies.add(new MergeSort());
     }
 
-    public static void sortArrays(HashMap<ArrayBuilder.arrayTypes, int[][]> testArrays) {
+    public static void sortArrays(HashMap<ArrayBuilder.arrayTypes, int[][]> testArrayTypes) {
 
-        //iterate through the kv pairs. use the key as the iterator so that we use it later to print what ordering we sorted
-        for (ArrayBuilder.arrayTypes type : testArrays.keySet()) {
+        //iterate through the sorting algorithms
+        for (ArraySortingInterface strategy : sortingStrategies) {
 
-            //extract the int arrays for copying then sorting
-            int[][] arrayConfig = testArrays.get(type);
-            //make copy of arrays
-            int[][] arrayCopies;
+            //set up a new results data object to store results in
+            AlgorithmTestResults results = new AlgorithmTestResults(strategy.getAlgorithmName(),
+                    totalOrderingTypes, totalSortingAlgorithms);
 
-            for (ArraySortingInterface strategy : sortingStrategies) {
-                arrayCopies = copyArrays(arrayConfig);
-                timeThisSort(type, strategy, arrayCopies);
+            //iterate through the different array ordering types and sort them
+            for (ArrayBuilder.arrayTypes type : testArrayTypes.keySet()) {
+
+                //label the data results
+                results.addOrderingType(type.getIndex(), type.toString());
+
+                //make a copy of the arrays so we have the same data between each algorithm
+                int[][] arrayConfig = testArrayTypes.get(type);
+                int[][] arrayCopies = copyArrays(arrayConfig);
+
+                timeThisSort(type, strategy, arrayCopies, results);
+
+                //add the results to the database of collected test results
+                testResults.put(strategy.getAlgorithmName(), results);
             }
         }
     }
 
     // helper function to make the sortArrays function a bit easier to read
-    private static void timeThisSort(ArrayBuilder.arrayTypes type, ArraySortingInterface strategy, int[][] arrayCopies) {
+    private static void timeThisSort(ArrayBuilder.arrayTypes type, ArraySortingInterface strategy,
+                                     int[][] arrayCopies, AlgorithmTestResults result) {
+
+        int[] arraySizeData = new int[arrayCopies.length];
+        String[] arrayTimingData = new String[arrayCopies.length];
 
         for (int i = 0; i < arrayCopies.length; i++) {
 
@@ -62,23 +81,23 @@ public class ProjectRunner {
             strategy.sortArray(arrayCopies[i]);
             stopWatch.end();
 
-            String[] result = new String[fields];
-            result[0] = strategy.algorithmName();
-            result[1] = type.toString();
-            result[2] = Integer.toString(arraySize);
-            result[3] = stopWatch.getDuration();
+            arraySizeData[i] = arraySize;
+            arrayTimingData[i] = stopWatch.getDuration();
+            result.addData(type.getIndex(), arraySizeData, arrayTimingData);
 
             String printResult = String.format("Algorithm: %s. Array type: %s %s elements Time spent: %s",
-                    strategy.algorithmName(), type.toString(), arraySize, stopWatch.getDuration());
+                    strategy.getAlgorithmName(), type.toString(), arraySize, stopWatch.getDuration());
+
             stopWatch.reset();
             printResults.add(printResult);
-            results.add(result);
         }
     }
 
     /**
      * array copy function because when we want to compare the sorting algorithm data we want to use the same array
      * contents for each algorithm to get the most accurate comparison
+     * <p>
+     * Note: we should probably move this to the array builder class to make this one a bit cleaner
      */
     public static int[][] copyArrays(int[][] arrays) {
 

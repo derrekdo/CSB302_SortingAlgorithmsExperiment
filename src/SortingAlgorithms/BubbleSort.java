@@ -7,7 +7,7 @@ package SortingAlgorithms;
 public class BubbleSort implements ArraySortingInterface {
 
     public void sortArray(int[] array) {
-        
+
         //go through the entire array until one less than the last element.
         //we stop before the last because we are always peeking one index further into the array
         for (int j = 0; j < array.length - 1; j++) {
@@ -24,7 +24,7 @@ public class BubbleSort implements ArraySortingInterface {
         }
     }
 
-    public String algorithmName() {
+    public String getAlgorithmName() {
         return "Bubble Sort";
     }
 }

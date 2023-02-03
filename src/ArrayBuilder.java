@@ -6,11 +6,22 @@ public class ArrayBuilder {
     private static Random rand = new Random();
 
     public enum arrayTypes {
-        random,
-        reverseOrdered,
-        ordered,
-        halfOrdered,
-        quarterRandom
+        random(0),
+        reverseOrdered(1),
+        ordered(2),
+        halfOrdered(3),
+        quarterRandom(4);
+
+        int index;
+
+        arrayTypes(int i) {
+            index = i;
+        }
+
+        int getIndex() {
+            return index;
+        }
+
     }
 
     /**
