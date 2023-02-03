@@ -36,10 +36,9 @@ public class MergeSort implements ArraySortingInterface{
         array1 = split(array1);
         array2 = split(array2);
 
-        //temp array to hold the merged elements
-        int[] temp = new int[array1.length + array2.length];
-        //makes the array equal to the temp array
-        array = merge(temp, array1, array2);
+
+        //places elements back into the array sorted
+        array = merge(array, array1, array2);
 
         return array;
     }
@@ -54,18 +53,18 @@ public class MergeSort implements ArraySortingInterface{
         while(l != array1.length && j != array2.length){
             //compares the elements in each subarray
             //and adds the lower element into the merged array and increments index
-            if(array1[j] < array2[l]){
-                array[i] = array1[j];
-                j++;
-                i++;
-            }else if(array1[j] > array2[l]){
-                array[i] = array2[l];
+            if(array1[l] < array2[j]){
+                array[i] = array1[l];
                 l++;
                 i++;
+            }else if(array1[l] > array2[j]){
+                array[i] = array2[j];
+                j++;
+                i++;
             //if both elements are the same add both to the merged array and increment both subarray
-            }else if(array1[j] == array2[l]){
-                array[i] = array1[j];
-                array[i+1] = array2[l];
+            }else if(array1[l] == array2[j]){
+                array[i] = array1[l];
+                array[i+1] = array2[j];
                 j++;
                 l++;
                 i+=2;
@@ -73,17 +72,17 @@ public class MergeSort implements ArraySortingInterface{
         }
 
         //adds all elements in the remaining subarray to the merged array
-        if(j == array1.length){
-            while(l != array2.length){
-                array[i] = array2[l];
-                i++;
-                l++;
-            }
-        }else if(l == array2.length){
-            while(j != array1.length){
-                array[i] = array1[j];
+        if(l == array1.length){
+            while(j != array2.length){
+                array[i] = array2[j];
                 i++;
                 j++;
+            }
+        }else if(j == array2.length){
+            while(l != array1.length){
+                array[i] = array1[l];
+                i++;
+                l++;
             }
         }
         return array;
