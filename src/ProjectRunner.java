@@ -37,6 +37,8 @@ public class ProjectRunner {
         sortingStrategies.add(new BubbleSort());
         sortingStrategies.add(new SelectionSort());
         sortingStrategies.add(new MergeSort());
+        sortingStrategies.add(new ShellSort());
+        sortingStrategies.add(new HeapSort());
     }
 
     public static void sortArrays(HashMap<ArrayBuilder.arrayTypes, int[][]> testArrayTypes) {
