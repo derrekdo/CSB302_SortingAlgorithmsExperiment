@@ -28,7 +28,7 @@ public class HeapSort implements ArraySortingInterface{
     public void heapify(int[] array, int node, int size){
         int largest = node;
         int leftChild = 2 * node + 1;
-        int rightChild = 2 * node + 1;
+        int rightChild = 2 * node + 2;
 
         //detemines which child node is larger based on the current root node
         if(leftChild < size && array[leftChild] > array[largest]){
@@ -51,7 +51,7 @@ public class HeapSort implements ArraySortingInterface{
         }
     }
 
-    public String algorithmName() {
+    public String getAlgorithmName() {
         return "Heap Sort";
     }
 }
