@@ -110,7 +110,7 @@ public class SortingAlgorithmsJUnitTest {
 
     @Test
     void testQuickSortMedianThree(){
-        Quick_Midian_of_Three sort = new Quick_Midian_of_Three();
+        QuickSort_Median_of_Three sort = new QuickSort_Median_of_Three();
 
         System.out.println("--------------- QUICK SORT (MEDIAN-OF-THREE) TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
