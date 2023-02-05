@@ -10,11 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SortingAlgorithmsJUnitTest {
 
     int[] sorted   = {0,0,1,3,4,9,15,23,45,52,64,69,80,81,100,354};
+    int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
 
     @Test
     void testBubbleSort(){
         BubbleSort sort = new BubbleSort();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
 
         System.out.println("--------------- BUBBLE SORT TEST ---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -27,7 +27,6 @@ public class SortingAlgorithmsJUnitTest {
     @Test
     void testHeapSort(){
         HeapSort sort = new HeapSort();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
 
         System.out.println("--------------- HEAP SORT TEST ---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -40,7 +39,6 @@ public class SortingAlgorithmsJUnitTest {
     @Test
     void testInsertionSort(){
         InsertionSort sort = new InsertionSort();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
 
         System.out.println("--------------- INSERTION SORT TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -53,7 +51,6 @@ public class SortingAlgorithmsJUnitTest {
     @Test
     void testMergeSort(){
         MergeSort sort = new MergeSort();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
 
         System.out.println("--------------- MERGE SORT TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -66,7 +63,6 @@ public class SortingAlgorithmsJUnitTest {
     @Test
     void testSelectionSort(){
         SelectionSort sort = new SelectionSort();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
 
         System.out.println("--------------- SELECTION SORT TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -79,7 +75,6 @@ public class SortingAlgorithmsJUnitTest {
     @Test
     void testShellSort(){
         ShellSort sort = new ShellSort();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
 
         System.out.println("--------------- SHELL SORT TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -89,10 +84,9 @@ public class SortingAlgorithmsJUnitTest {
         assertEquals(Arrays.toString(sorted),Arrays.toString(unsorted));
     }
 
-/*    @Test
+    @Test
     void testQuickSortFirstElement(){
-        QuickSortFirstElement sort = new QuickSortFirstElement();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
+        QuickSort sort = new QuickSort();
 
         System.out.println("--------------- QUICK SORT (FIRST ELEMENT) TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -104,8 +98,7 @@ public class SortingAlgorithmsJUnitTest {
 
     @Test
     void testQuickSortRandomElement(){
-        QuickSortRandomElement sort = new QuickSortRandomElement();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
+        QuickSort_Randomized sort = new QuickSort_Randomized();
 
         System.out.println("--------------- QUICK SORT (RANDOM ELEMENT) TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -117,8 +110,7 @@ public class SortingAlgorithmsJUnitTest {
 
     @Test
     void testQuickSortMedianThree(){
-        QuickSortMedianThree sort = new QuickSortMedianThree();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
+        Quick_Midian_of_Three sort = new Quick_Midian_of_Three();
 
         System.out.println("--------------- QUICK SORT (MEDIAN-OF-THREE) TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -127,11 +119,10 @@ public class SortingAlgorithmsJUnitTest {
 
         assertEquals(Arrays.toString(sorted),Arrays.toString(unsorted));
     }
-
+/*
     @Test
     void testCountingSort(){
         CountingSort sort = new CountingSort();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
 
         System.out.println("--------------- COUNTING SORT TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -144,7 +135,6 @@ public class SortingAlgorithmsJUnitTest {
     @Test
     void testBucketSort(){
         BucketSort sort = new BucketSort();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
 
         System.out.println("--------------- BUCKET SORT TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
@@ -157,7 +147,6 @@ public class SortingAlgorithmsJUnitTest {
     @Test
     void testRadixSort(){
         RadixSort sort = new RadixSort();
-        int[] unsorted = {80,15,23,0,69,52,45,354,81,64,4,1,100,9,0,3};
 
         System.out.println("--------------- RADIX SORT TEST---------------");
         System.out.println("Array Before:\n" + Arrays.toString(unsorted));
