@@ -21,7 +21,6 @@ public class QuickSort_Median_of_Three extends AbstractQuickSort {
         nums[left] = tempArr[0];
         nums[mid] = tempArr[2];
         nums[right] = tempArr[1];
-
         return nums[right];
     }
 }
