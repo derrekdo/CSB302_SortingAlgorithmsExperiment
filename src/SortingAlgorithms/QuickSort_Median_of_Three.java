@@ -2,7 +2,7 @@ package SortingAlgorithms;
 
 import java.util.Arrays;
 
-public class Quick_Midian_of_Three extends AbstractQuickSort {
+public class QuickSort_Median_of_Three extends AbstractQuickSort {
 
     @Override
     public int getPivot(int[] nums, int left, int right) {
@@ -18,9 +18,9 @@ public class Quick_Midian_of_Three extends AbstractQuickSort {
         tempArr[1] = nums[mid];
 
         Arrays.sort(tempArr);
-        nums[0] = tempArr[0];
+        nums[left] = tempArr[0];
         nums[mid] = tempArr[2];
-        nums[2] = tempArr[1];
+        nums[right] = tempArr[1];
 
         return nums[right];
     }
