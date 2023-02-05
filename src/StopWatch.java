@@ -25,9 +25,11 @@ public class StopWatch {
     }
 
     public String getDuration() {
-
+        if (start == null || end == null){
+            throw new IllegalStateException("start or null can't be null");
+        }
         Duration duration = Duration.between(start, end);
 
-        return duration.toString();
+        return String.valueOf(duration.toMillis());
     }
 }
