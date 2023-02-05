@@ -30,6 +30,7 @@ public class StopWatch {
         }
         Duration duration = Duration.between(start, end);
 
-        return String.valueOf(duration.toMillis());
+        long lengthOfTime = duration.getNano() /1000;
+        return String.valueOf(lengthOfTime);
     }
 }
