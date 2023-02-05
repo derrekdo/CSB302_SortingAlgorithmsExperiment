@@ -5,31 +5,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProjectRunner {
+
+    //helper classes
     static ArrayList<ArraySortingInterface> sortingStrategies;
     static StopWatch stopWatch;
-    static HashMap<String, AlgorithmTestResults> testResults;
-    static ArrayList<String> printResults; // delete this later. this is for debug now
-    static int totalOrderingTypes;
-    static int totalSortingAlgorithms;
 
+    //data output
+    static HashMap<String, AlgorithmTestResults> fileTestResults;
+    static ArrayList<String> printResults;
+
+    //main function. instantiates and initializes all of our necessary helper objects and test data
     public static void main(String[] args) throws IOException {
 
         HashMap<ArrayBuilder.arrayTypes, int[][]> testArrayTypes = ArrayBuilder.buildAllArrays();
         stopWatch = new StopWatch();
-        testResults = new HashMap<String, AlgorithmTestResults>();
+        fileTestResults = new HashMap<String, AlgorithmTestResults>();
         printResults = new ArrayList<String>();
 
         buildStartegyList();
 
-        totalOrderingTypes = ArrayBuilder.arrayTypes.values().length;
-        totalSortingAlgorithms = sortingStrategies.size();
-
         sortArrays(testArrayTypes);
+
         printResults();
-        OutputMaker.makeCSV(testResults);
+        CSVDataWriter.makeCSV(fileTestResults);
     }
 
-    //add your sorting algorithms here.
+    /**
+     * Function for adding the sorting algorithms to the list. Later they are used one by one to sort arrays of
+     * integers. Implements strategy pattern
+     */
     public static void buildStartegyList() {
 
         sortingStrategies = new ArrayList<ArraySortingInterface>();
@@ -41,7 +45,16 @@ public class ProjectRunner {
         sortingStrategies.add(new HeapSort());
     }
 
-    public static void sortArrays(HashMap<ArrayBuilder.arrayTypes, int[][]> testArrayTypes) {
+    /**
+     * Helper function for iterating through each sorting algorithm then ordering type and sorting the data
+     * data is recorded twice - first for output to terminal and then to a data object for creating a csv file
+     *
+     * @param testArraysByTypes the type of arrays to be sorted (random, reverse ordered, etc)
+     */
+    public static void sortArrays(HashMap<ArrayBuilder.arrayTypes, int[][]> testArraysByTypes) {
+
+        int totalOrderingTypes = ArrayBuilder.arrayTypes.values().length;
+        int totalSortingAlgorithms = sortingStrategies.size();
 
         //iterate through the sorting algorithms
         for (ArraySortingInterface strategy : sortingStrategies) {
@@ -51,22 +64,22 @@ public class ProjectRunner {
                     totalOrderingTypes, totalSortingAlgorithms);
 
             //iterate through the different array ordering types and sort them
-            for (ArrayBuilder.arrayTypes type : testArrayTypes.keySet()) {
+            for (ArrayBuilder.arrayTypes type : testArraysByTypes.keySet()) {
 
                 //label the data results
                 results.addOrderingType(type.getIndex(), type.toString());
 
                 //make a copy of the arrays so we have the same data between each algorithm
-                int[][] arrayConfig = testArrayTypes.get(type);
-                int[][] arrayCopies = copyArrays(arrayConfig);
+                int[][] testsArrays = testArraysByTypes.get(type);
+                int[][] testArrayCopies = ArrayBuilder.copyArrays(testsArrays);
 
-                timeThisSort(type, strategy, arrayCopies, results);
+                timeThisSort(type, strategy, testArrayCopies, results);
 
                 //add the results to the database of collected test results
-                testResults.put(strategy.getAlgorithmName(), results);
+                fileTestResults.put(strategy.getAlgorithmName(), results);
             }
         }
-    }
+    }// O(n^2)
 
     // helper function to make the sortArrays function a bit easier to read
     private static void timeThisSort(ArrayBuilder.arrayTypes type, ArraySortingInterface strategy,
@@ -96,20 +109,10 @@ public class ProjectRunner {
     }
 
     /**
-     * array copy function because when we want to compare the sorting algorithm data we want to use the same array
-     * contents for each algorithm to get the most accurate comparison
-     * <p>
-     * Note: we should probably move this to the array builder class to make this one a bit cleaner
+     * Basic helper function for printing out the contents of our 'print' results data.
+     * This is different from the file test results because that data object is processed in another class
+     * to make .csv files. This function just prints the test results to terminal
      */
-    public static int[][] copyArrays(int[][] arrays) {
-
-        int[][] arrayCopies = new int[arrays.length][];
-        for (int i = 0; i < arrays.length; i++) {
-            arrayCopies[i] = arrays[i].clone();
-        }
-        return arrayCopies;
-    }
-
     public static void printResults() {
         for (String result : printResults) {
             System.out.println(result);
