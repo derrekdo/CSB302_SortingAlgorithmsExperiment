@@ -39,6 +39,9 @@ public class ProjectRunner {
         sortingStrategies.add(new MergeSort());
         sortingStrategies.add(new ShellSort());
         sortingStrategies.add(new HeapSort());
+        sortingStrategies.add(new QuickSort());
+        sortingStrategies.add(new QuickSort_Randomized());
+        sortingStrategies.add(new QuickSort_Median_of_Three());
     }
 
     public static void sortArrays(HashMap<ArrayBuilder.arrayTypes, int[][]> testArrayTypes) {
