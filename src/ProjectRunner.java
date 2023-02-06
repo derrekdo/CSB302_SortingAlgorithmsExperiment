@@ -50,6 +50,9 @@ public class ProjectRunner {
         sortingStrategies.add(new QuickSort());
         sortingStrategies.add(new QuickSort_Randomized());
         sortingStrategies.add(new QuickSort_Median_of_Three());
+        sortingStrategies.add(new BucketSort());
+        sortingStrategies.add(new CountingSort());
+        sortingStrategies.add(new RadixSort());
     }
 
     /**
