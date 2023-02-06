@@ -24,6 +24,7 @@ public class BucketSort implements ArraySortingInterface {
 		ArrayList<Integer>[] bins = new ArrayList[BIN_COUNT];
 
 		// set up the bins to distribute the integers into
+		// O(N)
 		for (int index = 0; index < BIN_COUNT; index++) {
 			bins[index] = new ArrayList<Integer>();
 		}
@@ -33,6 +34,7 @@ public class BucketSort implements ArraySortingInterface {
 		int max = array[0];
 
 		// find maximum value in array
+		// O(N)
 		for (int index = 1; index < array.length; index++) {
 			max = Math.max(array[index], max);
 		}
@@ -42,6 +44,7 @@ public class BucketSort implements ArraySortingInterface {
 
 
 		// distribute integers into bins
+		// O(N)
 		for (int index = 0; index < array.length; index++) {
 			int bin = array[index] * BIN_COUNT / max;
 			bins[bin].add(array[index]);
@@ -50,6 +53,7 @@ public class BucketSort implements ArraySortingInterface {
 
 		// copy each bin into array, sort each array,
 		// then copy array into original array
+		// O(N^2)
 		for (int bin = 0; bin < bins.length; bin++) {
 			// set up sorted array
 			int[] sorted = new int[bins[bin].size()];
