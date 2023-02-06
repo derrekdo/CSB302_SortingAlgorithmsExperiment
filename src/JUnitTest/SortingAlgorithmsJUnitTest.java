@@ -119,7 +119,7 @@ public class SortingAlgorithmsJUnitTest {
 
         assertEquals(Arrays.toString(sorted),Arrays.toString(unsorted));
     }
-/*
+
     @Test
     void testCountingSort(){
         CountingSort sort = new CountingSort();
@@ -154,5 +154,5 @@ public class SortingAlgorithmsJUnitTest {
         System.out.println("Array After:\n" + Arrays.toString(unsorted));
 
         assertEquals(Arrays.toString(sorted),Arrays.toString(unsorted));
-    }*/
+    }
 }
