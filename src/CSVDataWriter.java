@@ -3,10 +3,10 @@ import java.io.IOException;
 import java.util.HashMap;
 
 /**
- * Class for taking testResults from the project runner and making a CSV file
+ * Class for taking fileTestResults from the project runner and making a CSV file
  */
 
-public class OutputMaker {
+public class CSVDataWriter {
 
     public static void makeCSV(HashMap<String, AlgorithmTestResults> results) throws IOException {
 

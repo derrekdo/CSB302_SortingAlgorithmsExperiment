@@ -1,10 +1,20 @@
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * Class for making arrays of integers for our algorithms to sort
+ */
 public class ArrayBuilder {
+
+    //constants based on project requirements
+    private static final int TOTAL_ARRAYS = 14;
+    private static final int ARRAY_SIZE_MULTIPLIER = 2;
+    private static final int INITIAL_ARRAY_SIZE = 4;
+    private static final int LARGEST_INT_SIZE = 40000;
 
     private static Random rand = new Random();
 
+    // enum set up so we can also use it like an index in other areas of the project
     public enum arrayTypes {
         random(0),
         reverseOrdered(1),
@@ -12,13 +22,13 @@ public class ArrayBuilder {
         halfOrdered(3),
         quarterRandom(4);
 
-        int index;
+        private int index;
 
         arrayTypes(int i) {
             index = i;
         }
 
-        int getIndex() {
+        public int getIndex() {
             return index;
         }
 
@@ -43,23 +53,22 @@ public class ArrayBuilder {
         HashMap<arrayTypes, int[][]> arraysMap = new HashMap<arrayTypes, int[][]>();
         arraysMap.put(arrayTypes.random, buildRandomArrays());
 
-
         return arraysMap;
     }
 
     /**
-     * function for making 2D array for the builder functions
+     * helper function for initializing a 2D array of integers for the other array builder functions
      *
      * @return
      */
     private static int[][] arrayInitializer() {
 
-        int[][] output = new int[14][];
+        int[][] output = new int[TOTAL_ARRAYS][];
 
-        int size = 4;
-        for (int i = 0; i < 14; i++) {
+        int size = INITIAL_ARRAY_SIZE;
+        for (int i = 0; i < TOTAL_ARRAYS; i++) {
             output[i] = new int[size];
-            size *= 2;
+            size *= ARRAY_SIZE_MULTIPLIER;
         }
         return output;
     }
@@ -76,10 +85,26 @@ public class ArrayBuilder {
         for (int i = 0; i < output.length; i++) {
 
             for (int j = 0; j < output[i].length; j++) {
-                int num = rand.nextInt(40000);
+                int num = rand.nextInt(LARGEST_INT_SIZE);
                 output[i][j] = num;
             }
         }
         return output;
+    }
+
+    /**
+     * array copy function because we want to use the same data in each of our algorithms for accurate timing results
+     * Also, the algorithms modify the incoming arrays so we need to preserve the data before handing over to be sorted
+     *
+     * @param arrays The arrays you want to copy
+     * @return a 2D integer array with a deep copy of the original array elements
+     */
+    public static int[][] copyArrays(int[][] arrays) {
+
+        int[][] arrayCopies = new int[arrays.length][];
+        for (int i = 0; i < arrays.length; i++) {
+            arrayCopies[i] = arrays[i].clone();
+        }
+        return arrayCopies;
     }
 }

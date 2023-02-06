@@ -4,7 +4,7 @@
 public class AlgorithmTestResults {
 
     private String algorithmName;
-    private String[] orderingTypes;
+    private String[] orderingTypes; // random, 1/2 random, reverse ordered etc
     private int[][] arraySizeData;
     private String[][] sortTimingData;
 
