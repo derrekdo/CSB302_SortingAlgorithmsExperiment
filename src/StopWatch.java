@@ -39,7 +39,7 @@ public class StopWatch {
         }
         Duration duration = Duration.between(start, end);
 
-        long lengthOfTime = duration.getNano() / NANO_TO_MICRO; // convert nanos to microseconds
+        long lengthOfTime = duration.toNanos() / NANO_TO_MICRO; // convert nanos to microseconds
         return String.valueOf(lengthOfTime);
     }
 }
