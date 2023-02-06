@@ -1,3 +1,7 @@
+import ProjectUtils.AlgorithmTestResults;
+import ProjectUtils.ArrayBuilder;
+import ProjectUtils.StopWatch;
+import ProjectUtils.TestOutputWriter;
 import SortingAlgorithms.*;
 
 import java.io.IOException;
@@ -11,23 +15,23 @@ public class ProjectRunner {
     static StopWatch stopWatch;
 
     //data output
-    static HashMap<String, AlgorithmTestResults> fileTestResults;
-    static ArrayList<String> printResults;
+    static HashMap<String, AlgorithmTestResults> writeToFileResults;
+    static ArrayList<String> printToTerminalResults;
 
     //main function. instantiates and initializes all of our necessary helper objects and test data
     public static void main(String[] args) throws IOException {
 
         HashMap<ArrayBuilder.arrayTypes, int[][]> testArrayTypes = ArrayBuilder.buildAllArrays();
         stopWatch = new StopWatch();
-        fileTestResults = new HashMap<String, AlgorithmTestResults>();
-        printResults = new ArrayList<String>();
+        writeToFileResults = new HashMap<String, AlgorithmTestResults>();
+        printToTerminalResults = new ArrayList<String>();
 
         buildStartegyList();
 
         sortArrays(testArrayTypes);
 
-        printResults();
-        CSVDataWriter.makeCSV(fileTestResults);
+        TestOutputWriter.printResults(printToTerminalResults);
+        TestOutputWriter.makeOutputCSVFile(writeToFileResults);
     }
 
     /**
@@ -79,7 +83,7 @@ public class ProjectRunner {
                 timeThisSort(type, strategy, testArrayCopies, results);
 
                 //add the results to the database of collected test results
-                fileTestResults.put(strategy.getAlgorithmName(), results);
+                writeToFileResults.put(strategy.getAlgorithmName(), results);
             }
         }
     }// O(n^2)
@@ -107,18 +111,7 @@ public class ProjectRunner {
                     strategy.getAlgorithmName(), type.toString(), arraySize, stopWatch.getDuration());
 
             stopWatch.reset();
-            printResults.add(printResult);
-        }
-    }
-
-    /**
-     * Basic helper function for printing out the contents of our 'print' results data.
-     * This is different from the file test results because that data object is processed in another class
-     * to make .csv files. This function just prints the test results to terminal
-     */
-    public static void printResults() {
-        for (String result : printResults) {
-            System.out.println(result);
+            printToTerminalResults.add(printResult);
         }
     }
 }
