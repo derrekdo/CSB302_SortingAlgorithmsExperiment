@@ -21,6 +21,7 @@ public class CountingSort implements ArraySortingInterface {
 		int max = array[0];
 
 		// find maximum value in array
+		// O(N)
 		for (int index = 1; index < array.length; index++) {
 			max = Math.max(array[index], max);
 		}
@@ -30,18 +31,21 @@ public class CountingSort implements ArraySortingInterface {
 		int[] counts = new int[max + 1];
 
 		// accumulate counts of each value
+		// O(N)
 		for (int index = 0; index < array.length; index++) {
 			counts[array[index]]++;
 		}
 
 
 		// calculate accumulation of counts of each value
+		// O(N)
 		for (int index = 1; index < counts.length; index++) {
 			counts[index] = counts[index] + counts[index - 1];
 		}
 
 
 		// shift counts one place to the right
+		// O(N)
 		for (int index = 0; index < counts.length - 1; index++) {
 			counts[index + 1] = counts[index];
 		}
@@ -51,6 +55,7 @@ public class CountingSort implements ArraySortingInterface {
 		int[] sorted = new int[array.length];
 
 		// copy values into sorted array according to counts array
+		// O(N)
 		for (int index = 0; index < array.length; index++) {
 			sorted[counts[array[index]]] = array[index];
 			counts[array[index]]++;
@@ -58,6 +63,7 @@ public class CountingSort implements ArraySortingInterface {
 
 
 		// copy values from sorted array to original array
+		// O(N)
 		for (int index = 0; index < array.length; index++) {
 			array[index] = sorted[index];
 		}

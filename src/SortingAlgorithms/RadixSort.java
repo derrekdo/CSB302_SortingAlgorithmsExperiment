@@ -24,6 +24,7 @@ public class RadixSort implements ArraySortingInterface {
 		ArrayList<Integer>[] bins = new ArrayList[10];
 
 		// set up the bins to distribute the integers into
+		// O(N)
 		for (int index = 0; index < bins.length; index++) {
 			bins[index] = new ArrayList<Integer>();
 		}
@@ -33,6 +34,7 @@ public class RadixSort implements ArraySortingInterface {
 		// declare flag indicating completion
 		boolean done;
 
+		// O(N^2)
 		do {
 			// calculate decimal place
 			int place = (int)Math.pow(10.0, power);
@@ -74,6 +76,7 @@ public class RadixSort implements ArraySortingInterface {
 		} while (!done);
 
 		// copy first bin into original array
+		// O(N)
 		for (int index = 0; index < array.length; index++) {
 			array[index] = bins[0].get(index);
 		}
