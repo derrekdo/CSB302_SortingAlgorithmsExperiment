@@ -27,7 +27,7 @@ public class CountingSort implements ArraySortingInterface {
 
 
 		// set up counts using maximum value in array
-		int[] counts = new int[max];
+		int[] counts = new int[max + 1];
 
 		// accumulate counts of each value
 		for (int index = 0; index < array.length; index++) {
