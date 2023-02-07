@@ -77,11 +77,9 @@ public class ArrayBuilder {
         }
         return output;
     }
-
     /**
      * function for building entirely randomized arrays
      *
-     * @return
      */
     public static int[][] buildRandomArrays() {
 
