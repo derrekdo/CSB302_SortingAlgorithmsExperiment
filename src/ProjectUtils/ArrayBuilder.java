@@ -48,7 +48,6 @@ public class ArrayBuilder {
      * <p>
      * each type is loaded into the container with 14 different lengths.( 4, 8, 16...32768 elements)
      *
-     * @return
      */
     public static HashMap<arrayTypes, int[][]> buildAllArrays() {
 
