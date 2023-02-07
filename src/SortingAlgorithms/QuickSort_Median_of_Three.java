@@ -2,6 +2,7 @@ package SortingAlgorithms;
 
 import java.util.Arrays;
 
+//O(n) = n^2
 public class QuickSort_Median_of_Three extends AbstractQuickSort {
 
     @Override
