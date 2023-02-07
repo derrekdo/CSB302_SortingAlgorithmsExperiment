@@ -11,8 +11,8 @@ public class ArrayBuilder {
     //constants based on project requirements
     private static final int TOTAL_ARRAYS = 14;
     private static final int ARRAY_SIZE_MULTIPLIER = 2;
-    private static final int INITIAL_ARRAY_SIZE = 64;
-    private static final int LARGEST_INT_SIZE = 40000;
+    private static final int INITIAL_ARRAY_SIZE = 4;
+    private static final int LARGEST_INT_SIZE = 4000;
 
     private static Random rand = new Random();
 
@@ -56,6 +56,10 @@ public class ArrayBuilder {
         watch.start();
         HashMap<arrayTypes, int[][]> arraysMap = new HashMap<arrayTypes, int[][]>();
         arraysMap.put(arrayTypes.random, buildRandomArrays());
+        arraysMap.put(arrayTypes.ordered, buildSorted());
+        arraysMap.put(arrayTypes.reverseOrdered, buildReversedArrays());
+        arraysMap.put(arrayTypes.halfOrdered, buildHalfOrdered());
+        arraysMap.put(arrayTypes.quarterRandom, buildQuarterRandom());
         watch.end();
         System.out.print("array building time: " + watch.getDuration());
         return arraysMap;
@@ -77,9 +81,11 @@ public class ArrayBuilder {
         }
         return output;
     }
+
     /**
      * function for building entirely randomized arrays
      *
+     * @return
      */
     public static int[][] buildRandomArrays() {
 
@@ -94,6 +100,89 @@ public class ArrayBuilder {
         }
         return output;
     }
+
+    public static int[][] buildReversedArrays(){
+        int[][] nums = buildRandomArrays();
+        for (int[] num : nums){
+            reverseSort(num);
+        }
+
+        return nums;
+    }
+
+    public static int[][] buildSorted(){
+        int[][] nums = buildRandomArrays();
+        for (int[] num : nums){
+            sort(num, 0);
+        }
+
+        return nums;
+    }
+
+    public static int[][] buildHalfOrdered(){
+        int[][] nums = buildRandomArrays();
+        for (int[] num : nums){
+            sort(num, (num.length)/2 + 1);
+        }
+
+        return nums;
+    }
+
+    public static int[][] buildQuarterRandom(){
+        int[][] nums = buildRandomArrays();
+        for (int[] num : nums){
+            int end = num.length * 3 / 4 + 1;
+            sort(num, end);
+        }
+
+        return nums;
+    }
+
+
+    public static int[][] buildQuarterOrdered(){
+        int[][] nums = buildRandomArrays();
+        for (int[] num : nums){
+            sort(num, num.length/2);
+        }
+
+        return nums;
+    }
+
+
+
+    public static void sort(int[] nums, int end){
+
+        for (int i = 0; i < nums.length -1 && i < end; i++){
+            int index = i;
+            for (int j = i; j < nums.length; j++){
+                if (nums[j] < nums[index]){
+                    index = j;
+                }
+            }
+
+            int temp = nums[index];
+            nums[index] = nums[i];
+            nums[i] = temp;
+        }
+    }
+
+    public static void reverseSort(int[] nums){
+
+        for (int i = 0; i < nums.length -1; i++){
+            int index = i;
+            for (int j = i; j < nums.length; j++){
+                if (nums[j] > nums[index]){
+                    index = j;
+                }
+            }
+
+            int temp = nums[index];
+            nums[index] = nums[i];
+            nums[i] = temp;
+        }
+    }
+
+
 
     /**
      * array copy function because we want to use the same data in each of our algorithms for accurate timing results
