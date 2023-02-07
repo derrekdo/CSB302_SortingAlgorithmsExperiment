@@ -8,6 +8,7 @@ public class ShellSort implements ArraySortingInterface {
 
         //interval is the space/gap between each element being compared
         //outer loop determine the gaps and reduces it each iteration
+        //Runtime: O(logn)
         for (int interval = size / 3; interval > 0; interval /= 3) {
 
             //performs insertion sort

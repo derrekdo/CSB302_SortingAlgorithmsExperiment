@@ -23,10 +23,12 @@ public class MergeSort implements ArraySortingInterface {
         int[] array2 = new int[half2];
 
         //adds the first half of elements to first subarray
+        //Runtime O(n)
         for (int i = 0; i < half1; i++) {
             array1[i] = array[i];
         }
 
+        //Runtime O(n)
         //adds the second half of elements to second subarray
         for (int i = 0; i < half2; i++) {
             array2[i] = array[i + half1];
@@ -50,6 +52,7 @@ public class MergeSort implements ArraySortingInterface {
         int i = 0;
 
         //merges the elements in each subarray into 1 array, until one subarray has no more elements
+        //Runtime: O(n)
         while (l != array1.length && j != array2.length) {
             //compares the elements in each subarray
             //and adds the lower element into the merged array and increments index
@@ -72,6 +75,7 @@ public class MergeSort implements ArraySortingInterface {
         }
 
         //adds all elements in the remaining subarray to the merged array
+        //Runtime: O(n) for both loops
         if (l == array1.length) {
             while (j != array2.length) {
                 array[i] = array2[j];

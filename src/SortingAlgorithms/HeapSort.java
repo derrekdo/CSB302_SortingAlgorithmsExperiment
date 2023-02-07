@@ -5,11 +5,13 @@ public class HeapSort implements ArraySortingInterface{
         int size = array.length;
 
         //builds the max heap
+        //Runtime:O(nlogn)
         for(int node = size/2; node >= 0; node--){
             heapify(array, node, size);
         }
 
         //sorts the array
+        //Runtime: O(logn)
         for(int i = size - 1; i > 0; i--){
             //holds the last element in heap
             int temp = array[i];
