@@ -64,7 +64,6 @@ public class ArrayBuilder {
         System.out.print("array building time: " + watch.getDuration());
         return arraysMap;
     }
-
     /**
      * helper function for initializing a 2D array of integers for the other array builder functions
      *
