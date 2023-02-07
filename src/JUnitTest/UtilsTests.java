@@ -2,14 +2,18 @@ package JUnitTest;
 
 import ProjectUtils.AlgorithmTestResults;
 import ProjectUtils.ArrayBuilder;
+import ProjectUtils.StopWatch;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the utils classes. Didn't have time to research how to test exception throwing properly or if
+ * files are placed on the hard drive (relative paths for different operating systems etc).
+ */
 public class UtilsTests {
 
     @Test
@@ -87,5 +91,44 @@ public class UtilsTests {
         for (int i = 0; i < timeDatas.length; i++) {
             assertNull(timeDatas[i]);
         }
+    }
+
+    @Test
+    void testAddData() {
+
+        String expectedName = "ExpectedAlgorithm";
+        int expectedOrderingTypes = 1;
+        int expectedSizeDataLength = 1;
+
+        AlgorithmTestResults testResults = new AlgorithmTestResults(expectedName, expectedOrderingTypes, expectedSizeDataLength);
+
+        int expectedIndex = 0;
+        int arraySize = 3;
+        int[] expectedSizeData = {1, 2, 3};
+        String[] expectedTimingData = {"10", "20", "30"};
+
+        testResults.addData(expectedIndex, expectedSizeData, expectedTimingData);
+
+        for (int i = 0; i < arraySize; i++) {
+            assertEquals(expectedSizeData[i], testResults.getArraySizes(expectedIndex)[i]);
+            assertEquals(expectedTimingData[i], testResults.getTimingData(expectedIndex)[i]);
+        }
+    }
+
+    @Test
+    void testStopWatchStartsAndEnds() {
+
+        StopWatch watch = new StopWatch();
+        watch.start();
+
+        int wasteSomeTime = 100000000;
+        for (int i = 0; i < wasteSomeTime; i++) {
+            for (int j = 0; j < wasteSomeTime; j++) {
+                int nothing = 1 + 1;
+            }
+        }
+        watch.end();
+        System.out.println(watch.getDuration());
+        assertTrue(Integer.parseInt(watch.getDuration()) > 0);
     }
 }
