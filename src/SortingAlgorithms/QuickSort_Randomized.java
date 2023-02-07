@@ -2,6 +2,7 @@ package SortingAlgorithms;
 
 import java.util.Random;
 
+//O(n) = n^2
 public class QuickSort_Randomized extends AbstractQuickSort {
 
     @Override
