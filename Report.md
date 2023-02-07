@@ -42,3 +42,7 @@ At first I had trouble distinquishing this algorithm from bubble sort. It looks 
 - Counting Sort
 - Bucket Sort
 - Radix Sort
+
+## Quick Sort
+
+Quicksort was having a problem with largest int value is 40000, which results in StackOverFlow exception if the array being sorted is large and sorted.  This makes sense because if the pivot is last elements (largest or smallest), then resulting partitions would be "pathological".  Recursion depth becomes really large. 
