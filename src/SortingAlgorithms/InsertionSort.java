@@ -26,7 +26,7 @@ public class InsertionSort implements ArraySortingInterface {
             }
             arrays[k + 1] = current; //put the current value wherever the additional iterator index ended up
         }
-    }
+    } // O(n^2)
 
     public String getAlgorithmName() {
         return "Insertion Sort";

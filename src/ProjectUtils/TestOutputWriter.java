@@ -29,22 +29,27 @@ public class TestOutputWriter {
 
             csvFile.write(headerLine + "\n");
 
+            int numArrays = result.getArraySizes(0).length;
+            int numTypes = orderingTypes.length;
+
             //iterate through the data and append it to a string that will be written to the file
             String dataLine = " ,";
-            for (int i = 0; i < orderingTypes.length; i++) {
+            for (int i = 0; i < numArrays; i++) {
 
-                int[] arraySizes = result.getArraySizes(i);
-                String[] timingData = result.getTimingData(i);
+                for (int j = 0; j < numTypes; j++) {
 
-                for (int j = 0; j < arraySizes.length; j++) {
+                    int[] arraySizes = result.getArraySizes(j);
+                    String[] timingData = result.getTimingData(j);
 
-                    dataLine += arraySizes[j] + ",";
-                    dataLine += timingData[j] + ",";
-                    dataLine += "\n";
-                    csvFile.write(dataLine);
-                    dataLine = " ,";
+                    dataLine += arraySizes[i] + ",";
+                    dataLine += timingData[i] + ",";
                 }
+
+                dataLine += "\n";
+                csvFile.write(dataLine);
+                dataLine = " ,";
             }
+
             csvFile.close();
         }
     }
