@@ -11,7 +11,7 @@ public class ArrayBuilder {
     //constants based on project requirements
     private static final int TOTAL_ARRAYS = 14;
     private static final int ARRAY_SIZE_MULTIPLIER = 2;
-    private static final int INITIAL_ARRAY_SIZE = 64;
+    private static final int INITIAL_ARRAY_SIZE = 4;
     private static final int LARGEST_INT_SIZE = 40000;
 
     private static Random rand = new Random();
@@ -53,11 +53,9 @@ public class ArrayBuilder {
     public static HashMap<arrayTypes, int[][]> buildAllArrays() {
 
         StopWatch watch = new StopWatch();
-        watch.start();
         HashMap<arrayTypes, int[][]> arraysMap = new HashMap<arrayTypes, int[][]>();
         arraysMap.put(arrayTypes.random, buildRandomArrays());
-        watch.end();
-        System.out.print("array building time: " + watch.getDuration());
+
         return arraysMap;
     }
 
@@ -106,15 +104,11 @@ public class ArrayBuilder {
      */
     public static int[][] copyArrays(int[][] arrays) {
 
-        StopWatch watch = new StopWatch();
-        watch.start();
-
         int[][] arrayCopies = new int[arrays.length][];
         for (int i = 0; i < arrays.length; i++) {
             arrayCopies[i] = arrays[i].clone();
         }
-        watch.end();
-        System.out.println("Time to copy: " + watch.getDuration());
+
         return arrayCopies;
     }
 }
