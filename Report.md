@@ -2,7 +2,7 @@
 
 ## Insertion Sort - Michael
 
-This is my personal favorite sort. Last quarter I did the seperate array version of the algorithm but adapted for a linked list. This time around I picked an approach I didn't come across when I initially looking into the algorithm. In the version of insertion sort I'm most familiar with we have a 2nd array that matches the length of our original unsorted array. Then we go element by element through the unsorted array and put the current element into the 2nd array. The current element begins at the 'end' of the sorted data and the inner loop of the algorithm 'pulls' it closer to the front if it's smaller than everything else. In the version of the algorithm I picked for this assignment we don't use a 2nd array. Instead we use the same array as the unsorted data and the inner loop behaves the same. The current element is checked against everything that comes before it in the array and is swapped/pulled based on it's value.
+This is my personal favorite sort. Last quarter I did the seperate array version of the algorithm but adapted for a linked list. This time around I picked an approach I didn't come across when I initially looking into the algorithm. In the version of insertion sort I'm most familiar with we have a 2nd array that matches the length of our original unsorted array. Then we go element by element through the unsorted array and put the current element into the 2nd array. The current element begins at the 'end' of the sorted data and the inner loop of the algorithm 'pulls' it closer to the front if it's smaller than everything else. In the version of the algorithm I picked for this assignment we don't use a 2nd array. Instead we use the same array as the unsorted data and the inner loop behaves the same. The current element is checked against everything that comes before it in the array and is swapped/pulled based on it's value. Of the O(n^2) sorting methods this seems to be the fastest according to tests. I think this is because, unlike the others, we don't iterate over as much of the sorted array. Once we begin pulling a number to the front of the array we stop the inner loop once we detect the next element in the array is smaller than the value we are seeking a position for. As we get further in the out loop the the inner loop does less work.
 
 ## Bubble Sort - Michael
 
@@ -27,7 +27,7 @@ for(int i = 0; i < array.length; i++)
       }
 }
 ```
- After the inner loop has finished if the boolean value is checked and if it was not changed then the algorithm ends early. I chose not to use this optimization because I wanted to show off the difference the O(n^2) algorithm makes over the much faster ones, even if the optimization is minimal.
+ After the inner loop has finished if the boolean value is checked and if it was not changed then the algorithm ends early. I chose not to use this optimization because I wanted to show off the difference the O(n^2) algorithm makes over the much faster ones, even if the optimization is minimal. As expected, this O(n^2) algorithm consistently goes slower than the others. Probably because it goes through every single element twice and performs the swap operations every time we detect a value in the inner loop is different than the next position in the array.
 
 ## Selection Sort - Michael
 
