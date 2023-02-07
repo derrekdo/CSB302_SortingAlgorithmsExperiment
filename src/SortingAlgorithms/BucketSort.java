@@ -51,6 +51,9 @@ public class BucketSort implements ArraySortingInterface {
 		}
 
 
+		// initialize original array index
+		int idx = 0;
+
 		// copy each bin into array, sort each array,
 		// then copy array into original array
 		// O(N^2)
@@ -68,9 +71,6 @@ public class BucketSort implements ArraySortingInterface {
 
 			// sort array
 			sorter.sortArray(sorted);
-
-			// initialize original array index
-			int idx = 0;
 
 			// copy sorted array into original array
 			for (int index = 0; index < sorted.length; index++) {

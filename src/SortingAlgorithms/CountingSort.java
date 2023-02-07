@@ -46,8 +46,8 @@ public class CountingSort implements ArraySortingInterface {
 
 		// shift counts one place to the right
 		// O(N)
-		for (int index = 0; index < counts.length - 1; index++) {
-			counts[index + 1] = counts[index];
+		for (int index = counts.length - 1; index > 0; index--) {
+			counts[index] = counts[index - 1];
 		}
 
 
