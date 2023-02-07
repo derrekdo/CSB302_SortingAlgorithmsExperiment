@@ -12,7 +12,6 @@ public class ArrayBuilder {
     private static final int TOTAL_ARRAYS = 14;
     private static final int ARRAY_SIZE_MULTIPLIER = 2;
     private static final int INITIAL_ARRAY_SIZE = 4;
-
     private static final int LARGEST_INT_SIZE = 40000;
 
     private static Random rand = new Random();
@@ -48,23 +47,20 @@ public class ArrayBuilder {
      * 75% ordered array
      * <p>
      * each type is loaded into the container with 14 different lengths.( 4, 8, 16...32768 elements)
-     *
      */
     public static HashMap<arrayTypes, int[][]> buildAllArrays() {
 
-        StopWatch watch = new StopWatch();
         HashMap<arrayTypes, int[][]> arraysMap = new HashMap<arrayTypes, int[][]>();
-        arraysMap.put(arrayTypes.random, buildRandomArrays());
 
+        arraysMap.put(arrayTypes.random, buildRandomArrays());
         arraysMap.put(arrayTypes.ordered, buildSorted());
         arraysMap.put(arrayTypes.reverseOrdered, buildReversedArrays());
         arraysMap.put(arrayTypes.halfOrdered, buildHalfOrdered());
         arraysMap.put(arrayTypes.quarterRandom, buildQuarterRandom());
-        watch.end();
-        System.out.print("array building time: " + watch.getDuration());
 
         return arraysMap;
     }
+
     /**
      * helper function for initializing a 2D array of integers for the other array builder functions
      *
@@ -101,36 +97,36 @@ public class ArrayBuilder {
         return output;
     }
 
-    public static int[][] buildReversedArrays(){
+    public static int[][] buildReversedArrays() {
         int[][] nums = buildRandomArrays();
-        for (int[] num : nums){
+        for (int[] num : nums) {
             reverseSort(num);
         }
 
         return nums;
     }
 
-    public static int[][] buildSorted(){
+    public static int[][] buildSorted() {
         int[][] nums = buildRandomArrays();
-        for (int[] num : nums){
+        for (int[] num : nums) {
             sort(num, 0);
         }
 
         return nums;
     }
 
-    public static int[][] buildHalfOrdered(){
+    public static int[][] buildHalfOrdered() {
         int[][] nums = buildRandomArrays();
-        for (int[] num : nums){
-            sort(num, (num.length)/2 + 1);
+        for (int[] num : nums) {
+            sort(num, (num.length) / 2 + 1);
         }
 
         return nums;
     }
 
-    public static int[][] buildQuarterRandom(){
+    public static int[][] buildQuarterRandom() {
         int[][] nums = buildRandomArrays();
-        for (int[] num : nums){
+        for (int[] num : nums) {
             int end = num.length * 3 / 4 + 1;
             sort(num, end);
         }
@@ -139,23 +135,22 @@ public class ArrayBuilder {
     }
 
 
-    public static int[][] buildQuarterOrdered(){
+    public static int[][] buildQuarterOrdered() {
         int[][] nums = buildRandomArrays();
-        for (int[] num : nums){
-            sort(num, num.length/2);
+        for (int[] num : nums) {
+            sort(num, num.length / 2);
         }
 
         return nums;
     }
 
 
+    public static void sort(int[] nums, int end) {
 
-    public static void sort(int[] nums, int end){
-
-        for (int i = 0; i < nums.length -1 && i < end; i++){
+        for (int i = 0; i < nums.length - 1 && i < end; i++) {
             int index = i;
-            for (int j = i; j < nums.length; j++){
-                if (nums[j] < nums[index]){
+            for (int j = i; j < nums.length; j++) {
+                if (nums[j] < nums[index]) {
                     index = j;
                 }
             }
@@ -166,12 +161,12 @@ public class ArrayBuilder {
         }
     }
 
-    public static void reverseSort(int[] nums){
+    public static void reverseSort(int[] nums) {
 
-        for (int i = 0; i < nums.length -1; i++){
+        for (int i = 0; i < nums.length - 1; i++) {
             int index = i;
-            for (int j = i; j < nums.length; j++){
-                if (nums[j] > nums[index]){
+            for (int j = i; j < nums.length; j++) {
+                if (nums[j] > nums[index]) {
                     index = j;
                 }
             }
@@ -181,7 +176,6 @@ public class ArrayBuilder {
             nums[i] = temp;
         }
     }
-
 
 
     /**
