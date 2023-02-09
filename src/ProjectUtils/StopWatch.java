@@ -1,33 +1,30 @@
 package ProjectUtils;
 
-import java.time.Duration;
-import java.time.Instant;
-
 /**
  * Basic class for timing stuff. Uses two Java Instance objects and checks the duration between them
  */
 public class StopWatch {
 
-    private Instant start;
-    private Instant end;
+    private long start;
+    private long end;
     private static final int NANO_TO_MICRO = 1000;
 
     public StopWatch() {
-        start = null;
-        end = null;
+        start = 0;
+        end = 0;
     }
 
     public void start() {
-        start = Instant.now();
+        start = System.nanoTime();
     }
 
     public void end() {
-        end = Instant.now();
+        end = System.nanoTime();
     }
 
     public void reset() {
-        start = null;
-        end = null;
+        start = 0;
+        end = 0;
     }
 
     /**
@@ -36,12 +33,11 @@ public class StopWatch {
      * @return a string with the timed duration in microseconds
      */
     public String getDuration() {
-        if (start == null || end == null) {
-            throw new IllegalStateException("start or null can't be null");
+        if (start == 0 || end == 0) {
+            throw new IllegalStateException("start or end cannot be 0");
         }
-        Duration duration = Duration.between(start, end);
+        long duration = (end - start) / NANO_TO_MICRO;
 
-        long lengthOfTime = duration.toNanos() / NANO_TO_MICRO; // convert nanos to microseconds
-        return String.valueOf(lengthOfTime);
+        return String.valueOf(duration);
     }
 }

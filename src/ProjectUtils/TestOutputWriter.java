@@ -11,6 +11,13 @@ import java.util.HashMap;
 
 public class TestOutputWriter {
 
+    /**
+     * Primary function for writing the test results to a csv file. An individual file is created for each
+     * algorithm type. The results will contain 5(array, time spent) sets of data coresponding to the array ordering.
+     *
+     * @param results A hashmap of test result objects using the algorithm name as a key
+     * @throws IOException if the function is unable to write to the disk
+     */
     public static void makeOutputCSVFile(HashMap<String, ProjectUtils.AlgorithmTestResults> results) throws IOException {
 
         for (ProjectUtils.AlgorithmTestResults result : results.values()) {
@@ -20,13 +27,14 @@ public class TestOutputWriter {
             FileWriter csvFile = new FileWriter(fileName + ".csv");
 
             //set up and write the header row
-            String headerLine = fileName + ",";
+            String headerLine = "Algorithm: " + fileName + ",";
 
             String[] orderingTypes = result.getOrderingTypes();
             for (int i = 0; i < orderingTypes.length; i++) {
-                headerLine += orderingTypes[i] + ", ,";
+                headerLine += "array: " + orderingTypes[i] + ",time(ms),";
             }
 
+            //write the header
             csvFile.write(headerLine + "\n");
 
             int numArrays = result.getArraySizes(0).length;
@@ -49,7 +57,7 @@ public class TestOutputWriter {
                 csvFile.write(dataLine);
                 dataLine = " ,";
             }
-
+            //close up the file so it can be opened by the user
             csvFile.close();
         }
     }
