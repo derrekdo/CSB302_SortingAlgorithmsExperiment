@@ -24,7 +24,7 @@ public class ArrayBuilder {
         random(0),
         reverseOrdered(1),
         ordered(2),
-        halfOrdered(3),
+        halfRandom(3),
         quarterRandom(4);
 
         private int index;
@@ -50,14 +50,16 @@ public class ArrayBuilder {
      * 75% ordered array
      * <p>
      * each type is loaded into the container with 14 different lengths.( 4, 8, 16...32768 elements)
-     *
-     * @return
      */
     public static HashMap<arrayTypes, int[][]> buildAllArrays() {
 
-        StopWatch watch = new StopWatch();
         HashMap<arrayTypes, int[][]> arraysMap = new HashMap<arrayTypes, int[][]>();
+
         arraysMap.put(arrayTypes.random, buildRandomArrays());
+        arraysMap.put(arrayTypes.ordered, buildSorted());
+        arraysMap.put(arrayTypes.reverseOrdered, buildReversedArrays());
+        arraysMap.put(arrayTypes.halfRandom, buildHalfOrdered());
+        arraysMap.put(arrayTypes.quarterRandom, buildQuarterRandom());
 
         arraysMap.put(arrayTypes.ordered, buildSorted());
         arraysMap.put(arrayTypes.reverseOrdered, buildReversedArrays());
@@ -89,7 +91,7 @@ public class ArrayBuilder {
     /**
      * function for building entirely randomized arrays
      *
-     * @return
+     * @return a 2D array of randomly ordered arrays
      */
     public static int[][] buildRandomArrays() {
 
@@ -186,6 +188,107 @@ public class ArrayBuilder {
         }
     }
 
+
+
+    /**
+     * function for building ordered arrays that are in reverse
+     *
+     * @return a 2D array of reverse ordered integers
+     */
+    public static int[][] buildReversedArrays() {
+        int[][] nums = buildRandomArrays();
+        for (int[] num : nums) {
+            reverseSort(num);
+        }
+
+        return nums;
+    }
+
+    /**
+     * Function for building a 2D array of sorted arrays
+     *
+     * @return a 2D array of sorted integers
+     */
+    public static int[][] buildSorted() {
+        int[][] nums = buildRandomArrays();
+        for (int[] num : nums) {
+            sort(num, 0);
+        }
+
+        return nums;
+    }
+
+    /**
+     * Function for building arrays of half ordered integers
+     *
+     * @return a 2D array of partially (half) sorted integers
+     */
+    public static int[][] buildHalfOrdered() {
+        int[][] nums = buildRandomArrays();
+        for (int[] num : nums) {
+            sort(num, (num.length) / 2 + 1);
+        }
+
+        return nums;
+    }
+
+    /**
+     * Function for building a partially sorted array of numbers
+     *
+     * @return a 2D array of partially sorted (25%) integers
+     */
+    public static int[][] buildQuarterRandom() {
+        int[][] nums = buildRandomArrays();
+        for (int[] num : nums) {
+            int end = num.length * 3 / 4 + 1;
+            sort(num, end);
+        }
+
+        return nums;
+    }
+
+    /**
+     * function for partially sorting an array
+     *
+     * @param nums the array of numbers to be partially sorted
+     * @param end  the index in the array to sort to
+     */
+    public static void sort(int[] nums, int end) {
+
+        for (int i = 0; i < nums.length - 1 && i < end; i++) {
+            int index = i;
+            for (int j = i; j < nums.length; j++) {
+                if (nums[j] < nums[index]) {
+                    index = j;
+                }
+            }
+
+            int temp = nums[index];
+            nums[index] = nums[i];
+            nums[i] = temp;
+        }
+    }
+
+    /**
+     * Function for sorting an array in descending order
+     *
+     * @param nums array of numbers to be sorted
+     */
+    public static void reverseSort(int[] nums) {
+
+        for (int i = 0; i < nums.length - 1; i++) {
+            int index = i;
+            for (int j = i; j < nums.length; j++) {
+                if (nums[j] > nums[index]) {
+                    index = j;
+                }
+            }
+
+            int temp = nums[index];
+            nums[index] = nums[i];
+            nums[i] = temp;
+        }
+    }
 
 
     /**

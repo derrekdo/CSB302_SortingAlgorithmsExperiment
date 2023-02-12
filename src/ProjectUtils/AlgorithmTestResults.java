@@ -1,7 +1,8 @@
 package ProjectUtils;
 
 /**
- * Basic class for housing test results so that saving and retrieving them is easier
+ * Basic class for housing test results so that saving and retrieving them is easier.
+ * This is used for writing the test results to a file.
  **/
 public class AlgorithmTestResults {
 

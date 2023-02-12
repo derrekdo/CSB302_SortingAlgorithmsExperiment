@@ -22,7 +22,7 @@ public class BubbleSort implements ArraySortingInterface {
                 }
             }
         }
-    }
+    }// O(n^2)
 
     public String getAlgorithmName() {
         return "Bubble Sort";
