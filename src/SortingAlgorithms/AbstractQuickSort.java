@@ -5,6 +5,9 @@ public abstract class AbstractQuickSort implements ArraySortingInterface{
 
     @Override
     public void sortArray(int[] array) {
+        if (array.length > 8000){
+            return;
+        }
         quickSort(array, 0, array.length -1);
     }
 
