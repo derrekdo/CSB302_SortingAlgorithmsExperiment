@@ -76,6 +76,13 @@ This should almost promise not having the worst pivot.  The performance definitl
 
 This version of quicksort in theory should performs just as well as the quicksort using median of medians.  There are many ways to implement this approach.  One interesting way is to shuffle the entire array partition entirely.  This should certainly avoid the problem of bad pivot, but it would introduce the additional runtime on shuffling the array.  If the array is somewhat sorted, then this avoid the problem of bad pivot entirely.  The approach I pick is pick a random pivot and swab it with the value at the last index.  This is relatively simpler to implement and works well with existing structure.
 
+## Conclusion - Rob
+
+Based on this experiment, there are definitely some conclusiions or lessons to be drawn from.
+1. Implementation matters.  For example, in quicksort, there are drastic different way to implement partition algorithm.  Each has it pros and cons. Based on reading from StackOverflow, if we had use Loare partition, it would have allievate some of the problems with stackoverflow exception.
+
+2. Input matters.  We have knowledge beforehand the characteristics of the input array, then we can chose sorting algorithm accordingly.  For example if the array is small and somewhat sorted, then we can use bubblesort (with checking to see if sorted while looping --ie no swaps detected) or insertion sort. If the array is large, somewhat sorted, and stability is not improtant, then we should chose merge sort. Quicksort should be use in the case where array is large and we can expected some kind of randomized input.
+A robust algorithm should detected the characteristics of the input array and implement one or two sorting strategies accordingly.  For example, introsort in C++ uses quicksort normally, but upon detecting large recursion depth, partition algorithm uses heap sort to allievate that problem. It also would use insertion in the case that array size is small and somewhat sorted. So the lesson learn is try to detect the character of array input, and use some kind of strategy pattern to chose sorting strategy.
 
 
 
