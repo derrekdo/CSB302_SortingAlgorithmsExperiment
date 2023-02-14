@@ -65,7 +65,7 @@ This should almost promise not having the worst pivot.  The performance definitl
 
 ## Quick Sort (Randomized pivot)
 
-This one in theory should performs just as well as the quicksort using median of medians.  There are many ways to implement this approach.  One interesting way is to shuffle the entire array partition entirely.  This should certainly avoid the problem of bad pivot, but it would introduce the additional runtime on shuffling the array.  If the array is somewhat sorted, then this avoid the problem of bad pivot entirely.  The approach I pick is pick a random pivot and swab it with the value at the last index.  This is relatively simpler to implement and works well with existing structure.
+This version of quicksort in theory should performs just as well as the quicksort using median of medians.  There are many ways to implement this approach.  One interesting way is to shuffle the entire array partition entirely.  This should certainly avoid the problem of bad pivot, but it would introduce the additional runtime on shuffling the array.  If the array is somewhat sorted, then this avoid the problem of bad pivot entirely.  The approach I pick is pick a random pivot and swab it with the value at the last index.  This is relatively simpler to implement and works well with existing structure.
 
 
 
