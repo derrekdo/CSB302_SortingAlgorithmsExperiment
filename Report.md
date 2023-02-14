@@ -45,13 +45,6 @@ Heap sort was the one algorithm I was able to understand how it works but not ho
 
 Shell sort was another intersting algorithm, as it is basically insertion sort but compares values based on an interval that continues to decrease. I saw various implementations for this algorithm, mainly in their increment sequences, such as knuth's sequence which is theoretically faster than using shells sequences which I used. I didn't use a faster increment sequence because this was the first time I had used tried making shell sort, and I felt that doing so wouldn't be as meaningful in the scope of this project.
 
-## Quick Sort - Rob
-
-Quicksort was having a problem with largest int value is 40000, which results in StackOverFlow exception if the array being sorted is large and sorted.  This makes sense because if the pivot is last elements (largest or smallest), then resulting partitions would be "pathological".  Recursion depth becomes really large. 
-
-Implementation-  I realize all three quick sorts are similar, so I should take advantage of either interface or abstract classes which I did there. I also learned that there are two schemes as to implement the partition algorithms.  I chose to use Lumato because it looks nice and pivot index is always at the end or the beginning.
-
-Runtime- The runtime for quicksort is O(n^2).  If the pivot is picked well, then this behavior is not observed.  In the case where the array is sorted or half sorted, pivot at the end can cause a lot of problem.  If the pivot is picked to be a median or random, then performance is a lot better.
 
 ## Quick Sort - Rob
 
