@@ -43,6 +43,18 @@ At first I had trouble distinquishing this algorithm from bubble sort. It looks 
 - Bucket Sort
 - Radix Sort
 
+## Merge Sort - Derrek
+
+Since I had experience working with this algorithm due to assignments last quarter, I was able to build it without researching the algorthm. Additionally there were other implementations similar to mine but because of how it written I didnt like it as much because its hard to follow due to the fact merge sort relies on the use of recursion to split the array; even with these difference the runtime still ends up being similar to what is expected.  
+
+## Heap Sort - Derrek
+
+Heap sort was the one algorithm I was able to understand how it works but not how to implement properly because of the idea of visualizing it as a tree to sort it confused me. After doing much research on this algortihm, there were a few videos that explained how to treat the array as tree using an equation to find the "parent" and "child" of said array. The implementations I chose to help build the sorting algorithm, was based on their implementation of using a max heap rather than min heap; I liked sorting the larger numbers first and moving down to the lower numbers. Moving on, the execution of the algorithm generates results that meet our expectations. 
+
+## Shell Sort - Derrek
+
+Shell sort was another intersting algorithm, as it is basically insertion sort but compares values based on an interval that continues to decrease. I saw various implementations for this algorithm, mainly in their increment sequences, such as knuth's sequence which is theoretically faster than using shells sequences which I used. I didn't use a faster increment sequence because this was the first time I had used tried making shell sort, and I felt that doing so wouldn't be as meaningful in the scope of this project.
+
 ## Quick Sort - Rob
 
 Quicksort was having a problem with largest int value is 40000, which results in StackOverFlow exception if the array being sorted is large and sorted.  This makes sense because if the pivot is last elements (largest or smallest), then resulting partitions would be "pathological".  Recursion depth becomes really large. 
