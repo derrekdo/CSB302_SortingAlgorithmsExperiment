@@ -64,4 +64,40 @@ Implementation-  I realize all three quick sorts are similar, so I should take a
 Runtime- The runtime for quicksort is O(n^2).  If the pivot is picked well, then this behavior is not observed.  In the case where the array is sorted or half sorted, pivot at the end can cause a lot of problem.  If the pivot is picked to be a median or random, then performance is a lot better.
 
 
+## Quick Sort (Last index as pivot) - Rob
+
+Quicksort was having a problem with largest integar value is 40000, which results in StackOverFlow exception if the array being sorted is large and sorted.  This makes sense because if the pivot is last elements (largest or smallest), then resulting partitions would be "pathological".  Recursion depth becomes really larg causing a stackoverflow.
+
+This cause me to have to limit the array lengths to stop before going over integar size of over 9000 to avoid the stackoverflow exception.
+
+Implementation-  I realize all three quick sorts are similar, so I should take advantage of either interface or abstract classes which I did there. I also learned that there are two schemes as to implement the partition algorithms.  The one I chose 
+
+Runtime- The runtime for quicksort is O(n^2).  If the pivot is picked well, then this behavior is not observed.  In the case where the array is sorted or half sorted, pivot at the end can cause a lot of problem.  If the pivot is picked to be a median or random, then performance is a lot better.
+
+
+## Quick Sort - Rob
+
+Quicksort was having a problem with largest int value is 40000, which results in StackOverFlow exception if the array being sorted is large and sorted.  This makes sense because if the pivot is last elements (largest or smallest), then resulting partitions would be "pathological".  Recursion depth becomes really large. 
+
+Implementation-  I realize all three quick sorts are similar, so I should take advantage of either interface or abstract classes which I did there. I also learned that there are two schemes as to implement the partition algorithms.  I chose to use Lomuto because it does not have "while(true)" structure and pivot index is always at the end or the beginning. 
+
+Runtime- The runtime for quicksort is O(n^2).  If the pivot is picked well, then this behavior is not observed.  In the case where the array is sorted or half sorted, pivot at the end can cause a lot of problem.  If the pivot is picked to be a median or random, then performance is a lot better.
+
+The following pertains to the other two quicksort as well.  Quicksort when array size is small performs okay but it performs betters as array gets bigger relative to the array size; I think it is because recursion probably sets up a lot of computing overhead so a basic simple sort like selection sort or insert sort should be chosen instead.
+In addition, using quicksort on almost sorted or sorted array sets does not perform well and it makes sense. In that case, quicksort should revert to insertion sort.  I believe some programming languages uses that implementation.
+
+
+## Quick Sort (Median of medians)
+
+This quicksort should solve the problem of having a bad pivot. This is used frequently in place of using the last index as the pivot.  The implement is as follow: pick 3 numbers (number at first index, middle index, and last index).  Sort the numbers and place the middle number as the pivot.
+
+This should almost promise not having the worst pivot.  The performance definitly shows that it is better the basic quicksort.
+
+## Quick Sort (Randomized pivot)
+
+I think this one performs just as well as quicksort using median of medians).  There are many ways to implement this approach.  One interesting way is to shuffle the array partition entirely.  This should certainly avoid the problem of bad pivot, but it would introduce the additional runtime on shuffling the array.  The approach I pick is pick a random pivot and swab it with the value at the last index.  This is relatively simpler to implement and works well with existing structure.
+
+
+
+
 
