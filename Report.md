@@ -33,16 +33,6 @@ for(int i = 0; i < array.length; i++)
 
 At first I had trouble distinquishing this algorithm from bubble sort. It looks nearly the same at first glance but the key difference is that in the inner loop we update a 'smallest' integer with the index of the smallest value we find in the array. The swap between the smallest and the value at the outer loop's position occurs after the entire inner loop has finished and not with every iteration like the bubble sort algorithm. Even though both of these algorithms are O(n^2) selection sort is consistently faster than bubble sort.
 
-- Shell Sort
-- Merge Sort
-- Quick Sort (pivot selected as first element)
-- Quick Sort (pivot selected as random element)
-- Quick Sort (pivot selected with Median-of-three)
-- Heap Sort
-- Counting Sort
-- Bucket Sort
-- Radix Sort
-
 ## Merge Sort - Derrek
 
 Since I had experience working with this algorithm due to assignments last quarter, I was able to build it without researching the algorthm. Additionally there were other implementations similar to mine but because of how it written I didnt like it as much because its hard to follow due to the fact merge sort relies on the use of recursion to split the array; even with these difference the runtime still ends up being similar to what is expected.  
