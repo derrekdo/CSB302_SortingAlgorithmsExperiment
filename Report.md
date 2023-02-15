@@ -76,6 +76,18 @@ This should almost promise not having the worst pivot.  The performance definitl
 
 This version of quicksort in theory should performs just as well as the quicksort using median of medians.  There are many ways to implement this approach.  One interesting way is to shuffle the entire array partition entirely.  This should certainly avoid the problem of bad pivot, but it would introduce the additional runtime on shuffling the array.  If the array is somewhat sorted, then this avoid the problem of bad pivot entirely.  The approach I pick is pick a random pivot and swab it with the value at the last index.  This is relatively simpler to implement and works well with existing structure.
 
+## Counting Sort - Joel
+​
+This sort is relatively easy to implement and it performs with O(N) time, but it's space complexity can be very costly if the range of values is broad and sparse.
+​
+## Bucket Sort - Joel
+​
+This sort is worthy of being familiar with but seems a dubious choice otherwise.  It depends on sorting each of the "buckets" that the data is placed in, which seems to beg the issue of which algorithm would be a good choice.  All it does is divide the data into piles and then call is some other sort (itself? recursively?) to finish the job.  This makes its performance dependent on the sort that's chosen to do that.
+​
+## Radix Sort - Joel
+​
+This sort is relatively easy to implement and is a good choice when sorting intergers.
+​
 ## Conclusion - Rob
 
 Based on this experiment, there are definitely some conclusiions or lessons to be drawn from.
